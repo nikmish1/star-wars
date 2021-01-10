@@ -1,0 +1,43 @@
+.result-box {
+  width: 90%;
+  box-sizing: border-box;
+}
+
+.result-content {
+  display: flex;
+}
+
+.result-box div {
+  display: flex;
+  padding: 0.5rem;
+}
+
+.high {
+  font-size: 4rem;
+  padding: 2rem 0 2rem 0;
+}
+
+.mid {
+  font-size: 2rem;
+  padding: 1rem 0 1rem 0;
+}
+
+.low {
+  font-size: 1rem;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.login-input-container {
+  background: #a4bdc4;
+  padding: 1rem;
+}
+
+/*
+background-color: #fff;
+    border: 1px solid #eee;
+    width: 100%;
+    padding: 15px 2px;
+    box-shadow: 0px 3px 6px 3px #eee;
+    border-radius: 0 0 15px 15px;
+
+*/

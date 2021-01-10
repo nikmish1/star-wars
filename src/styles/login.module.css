@@ -1,0 +1,42 @@
+.login-main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.login-input-container {
+  background: #a4bdc4;
+  padding: 1rem;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.login-main input[type="text"] {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  background: #a4bdc4;
+  width: 100%;
+}
+
+.rounded-btn {
+  background: red;
+  border: unset;
+  height: 50px;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.login-btn-container,
+.login-logo {
+  text-align: center;
+}
+
+.login-main {
+  background-image: url("https://lumiere-a.akamaihd.net/v1/images/resistance-db-yeagers-ship-main-image_0594596f.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
