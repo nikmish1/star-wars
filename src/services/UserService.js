@@ -1,5 +1,5 @@
 import request from "../api";
-import useUserData from "../hooks/useUserData";
+import Storage from "./StorageService";
 
 const UserService = {
   getAllUsers: () => {
@@ -14,8 +14,17 @@ const UserService = {
     ).length;
   },
 
+  setCurrentUser: (loginData) => {
+    Storage.set("loggedInUser", loginData);
+  },
+
   getCurrentUser: () => {
-    return { username: "Luke Skywalker" };
+    let currentUSer = Storage.get("loggedInUser");
+    return currentUSer;
+  },
+
+  deleteCurrentUser: () => {
+    Storage.delete("loggedInUser");
   },
 };
 

@@ -14,6 +14,10 @@ const Storage = {
     const value = JSON.parse(getStorageType(type).getItem(key));
     return value || null;
   },
+  delete: (key, type = "session") => {
+    const storage = getStorageType(type);
+    storage.removeItem(key);
+  },
 };
 
 export default Storage;

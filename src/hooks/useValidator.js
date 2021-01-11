@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const useSearchValidator = (str, shouldValidate) => {
   const [searchCount, setsearchCount] = useState(-1);
   const [intervalId, setIntervalId] = useState(null);
   const [timedout, setTimeout] = useState(false);
   const [isValid, setIsValid] = useState(null);
-
-  useEffect(() => {
-    if (shouldValidate) {
-      setsearchCount(searchCount + 1);
-      checkValidation();
-    }
-  }, [str]);
 
   useEffect(() => {
     if (shouldValidate) {
@@ -27,7 +20,7 @@ const useSearchValidator = (str, shouldValidate) => {
     };
   }, []);
 
-  const checkValidation = () => {
+  const checkValidation = useCallback(() => {
     if (searchCount <= 15) {
       setIsValid(true);
     } else {
@@ -41,7 +34,14 @@ const useSearchValidator = (str, shouldValidate) => {
         setIsValid(false);
       }
     }
-  };
+  }, [searchCount, timedout]);
+
+  useEffect(() => {
+    if (shouldValidate) {
+      setsearchCount(searchCount + 1);
+      checkValidation();
+    }
+  }, [str, searchCount, shouldValidate, checkValidation]);
   return isValid;
 };
 

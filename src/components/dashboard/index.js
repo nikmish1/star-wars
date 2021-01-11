@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { fetchCountryStates } from "../../actions/planetActions";
 import PopulationRange from "../../constants/planets/PopulationRamge";
 import useMatchedText from "../../hooks/useMatchedText";
@@ -15,12 +16,15 @@ const Dashboard = () => {
   const state = useSelector((state) => state.Planets);
   const { results } = state;
   const dispatch = useDispatch();
+  const history = useHistory();
   const [query, setquery] = useState("");
   let currentUser = UserService.getCurrentUser();
-  const shouldValidate = currentUser.name === "luke skywalker" ? false : true;
+  const shouldValidate =
+    currentUser.username === "Luke Skywalker" ? false : true;
 
   let isValidQuery = useSearchValidator(query, shouldValidate);
-
+  isValidQuery = isValidQuery === null ? true : isValidQuery;
+  console.log("isvalid:", isValidQuery);
   const GetPopulationIntensity = (population = 0) => {
     switch (true) {
       case population < PopulationRange.low.value:
@@ -59,17 +63,24 @@ const Dashboard = () => {
     setquery(queryText);
   };
 
+  const logout = () => {
+    UserService.deleteCurrentUser();
+    history.push("/login");
+  };
+
   useEffect(() => {
     fetchPlanets();
-  }, []);
+  }, [fetchPlanets]);
 
   return (
     <div className={styles["search-box-main"]}>
       <div className={styles["search-box-header"]}>
         <div className={styles["search-box-header-name"]}>
-          welcome back <strong>Nikhil</strong>
+          welcome back <strong>{currentUser.username}</strong>
         </div>
-        <div className={styles["search-box-header-exit"]}>exit</div>
+        <div className={styles["search-box-header-exit"]} onClick={logout}>
+          exit
+        </div>
       </div>
       <div className={styles.searchBoxContainer}>
         <div className={styles.searchBarContainer}>

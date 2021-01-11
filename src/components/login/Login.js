@@ -4,6 +4,7 @@ import Input from "../../atoms/Input";
 import RoundedButton from "../../atoms/RoundedButton";
 import UserService from "../../services/UserService";
 import styles from "../../styles/login.module.css";
+import Storage from "../../services/StorageService";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
@@ -11,6 +12,7 @@ const Login = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
     setLoginData({ ...loginData, [name]: value });
   };
 
@@ -19,6 +21,7 @@ const Login = () => {
     let isValid = await UserService.validateUser(loginData);
     // let isValid = true;
     if (isValid) {
+      Storage.set("loggedInUser", loginData);
       history.push(`/dashboard`);
     }
     console.log("isValid:", isValid);
@@ -37,7 +40,7 @@ const Login = () => {
           onChange={handleInputChange}
         />
         <Input
-          type="text"
+          type="password"
           id="passord"
           name="password"
           placeholder="Password"

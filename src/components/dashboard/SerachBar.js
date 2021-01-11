@@ -1,14 +1,10 @@
 import React from "react";
 import Input from "../../atoms/Input";
-import UserService from "../../services/UserService";
 import styles from "../../styles/searchBar.module.css";
 
 const SearchBar = ({ searchQuery, suggetions, isValidQuery }) => {
-  console.log("stylesstylesstylesstyles:", styles, isValidQuery);
-  let currentUser = UserService.getCurrentUser();
-  console.log("suggetions:::", suggetions, isValidQuery);
   const handleCharacterInput = (event) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     searchQuery(value);
   };
 
@@ -17,12 +13,12 @@ const SearchBar = ({ searchQuery, suggetions, isValidQuery }) => {
       <Input
         type="text"
         name="search-character"
-        placeholder="Search Character"
+        placeholder="Type planet name"
         id="search-character"
         readOnly={!isValidQuery}
         onChange={handleCharacterInput}
       />
-      <div>
+      <div className={suggetions.length > 0 ? styles["result-container"] : ""}>
         {suggetions.map(({ name, value, intensity }) => (
           <>
             <div className={`${styles["result-box"]}`}>
@@ -35,7 +31,9 @@ const SearchBar = ({ searchQuery, suggetions, isValidQuery }) => {
           </>
         ))}
       </div>
-      {!isValidQuery && <div>Only 15 queries are allowed in 1 mins</div>}
+      {isValidQuery === false && (
+        <div>Only 15 queries are allowed in 1 mins</div>
+      )}
     </>
   );
 };
