@@ -16,9 +16,8 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    debugger;
-    //let isValid = await UserService.validateUser(loginData);
-    let isValid = true;
+    let isValid = await UserService.validateUser(loginData);
+    // let isValid = true;
     if (isValid) {
       history.push(`/dashboard`);
     }
