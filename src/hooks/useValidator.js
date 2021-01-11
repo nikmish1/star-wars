@@ -20,6 +20,13 @@ const useSearchValidator = (str, shouldValidate) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (shouldValidate) {
+      setsearchCount((searchCount) => searchCount + 1);
+      checkValidation();
+    }
+  }, [str, shouldValidate]);
+
   const checkValidation = useCallback(() => {
     if (searchCount <= 15) {
       setIsValid(true);
@@ -30,18 +37,12 @@ const useSearchValidator = (str, shouldValidate) => {
         setIsValid(null);
         setTimeout(false);
       } else {
-        console.log("pause", searchCount, timedout);
+        console.log("paused", searchCount, timedout);
         setIsValid(false);
       }
     }
   }, [searchCount, timedout]);
 
-  useEffect(() => {
-    if (shouldValidate) {
-      setsearchCount(searchCount + 1);
-      checkValidation();
-    }
-  }, [str, searchCount, shouldValidate, checkValidation]);
   return isValid;
 };
 

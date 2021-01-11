@@ -19,16 +19,14 @@ const SearchBar = ({ searchQuery, suggetions, isValidQuery }) => {
         onChange={handleCharacterInput}
       />
       <div className={suggetions.length > 0 ? styles["result-container"] : ""}>
-        {suggetions.map(({ name, value, intensity }) => (
-          <>
-            <div className={`${styles["result-box"]}`}>
-              <div className={` ${styles[intensity]}`}>
-                <div>{name}</div>
-                <div>{value}</div>
-                {/* <div>{intensity}</div> */}
-              </div>
+        {suggetions.map(({ name, value, intensity }, index) => (
+          <div className={`${styles["result-box"]}`} key={index}>
+            <div className={` ${styles[intensity]}`}>
+              <div>{name}</div>
+              <div>{value}</div>
+              {/* <div>{intensity}</div> */}
             </div>
-          </>
+          </div>
         ))}
       </div>
       {isValidQuery === false && (

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchCountryStates } from "../../actions/planetActions";
-import PopulationRange from "../../constants/planets/PopulationRamge";
+import PopulationRange from "../../constants/planets/PopulationRange";
 import useMatchedText from "../../hooks/useMatchedText";
 import useSearchValidator from "../../hooks/useValidator";
 import UserService from "../../services/UserService";
@@ -24,17 +24,14 @@ const Dashboard = () => {
 
   let isValidQuery = useSearchValidator(query, shouldValidate);
   isValidQuery = isValidQuery === null ? true : isValidQuery;
-  console.log("isvalid:", isValidQuery);
+
   const GetPopulationIntensity = (population = 0) => {
     switch (true) {
       case population < PopulationRange.low.value:
-        // console.log("population case1:", population);
         return PopulationRange.low.category;
       case population < PopulationRange.mid.value:
-        // console.log("population case2:", population);
         return PopulationRange.mid.category;
       case population < PopulationRange.max.value:
-        // console.log("population case3:", population);
         return PopulationRange.max.category;
       default:
         return PopulationRange.max.category;

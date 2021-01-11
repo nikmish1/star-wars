@@ -7,7 +7,7 @@ const useMatchedText = (text, data) => {
   useEffect(() => {
     if (text) {
       let filteredItems = getMatchingData(text, data, "name");
-      console.log("searching results:", filteredItems);
+      // console.log("searching results:", filteredItems);
       setFilteredResult(filteredItems);
     } else {
       setFilteredResult([]);

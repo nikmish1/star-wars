@@ -26,6 +26,10 @@ const UserService = {
   deleteCurrentUser: () => {
     Storage.delete("loggedInUser");
   },
+
+  isAdmin: () => {
+    return UserService.getCurrentUser() === "Luke Skywalker";
+  },
 };
 
 export default UserService;
