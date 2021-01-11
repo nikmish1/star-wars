@@ -32,6 +32,7 @@
 
 .login-btn-container,
 .login-logo {
+  margin-top: 5px;
   text-align: center;
 }
 

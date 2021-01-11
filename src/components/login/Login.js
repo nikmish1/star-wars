@@ -8,6 +8,7 @@ import Storage from "../../services/StorageService";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
+  const [isValid, setisValid] = useState(null);
   const history = useHistory();
 
   const handleInputChange = (event) => {
@@ -19,6 +20,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     let isValid = await UserService.validateUser(loginData);
+    setisValid(isValid);
     // let isValid = true;
     if (isValid) {
       Storage.set("loggedInUser", loginData);
@@ -46,6 +48,9 @@ const Login = () => {
           placeholder="Password"
           onChange={handleInputChange}
         />
+        {isValid === false && (
+          <span>You are not authorized to access this</span>
+        )}
         <div className={styles["login-btn-container"]}>
           <RoundedButton type="submit" text="START" />
         </div>
