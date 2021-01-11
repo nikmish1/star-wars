@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 
-const useSearchValidator = (str) => {
-  // 1) start Time;
-  // 2) storeSearch Count;
-  // 2) check if search count > 10 && timer elapsed less 60sec
-
+const useSearchValidator = (str, shouldValidate) => {
   const [searchCount, setsearchCount] = useState(-1);
   const [intervalId, setIntervalId] = useState(null);
   const [timedout, setTimeout] = useState(false);
   const [isValid, setIsValid] = useState(null);
 
   useEffect(() => {
-    setsearchCount(searchCount + 1);
-    checkValidation();
+    if (shouldValidate) {
+      setsearchCount(searchCount + 1);
+      checkValidation();
+    }
   }, [str]);
 
   useEffect(() => {
-    let intervalId = setInterval(() => {
-      setTimeout(true);
-      setIsValid(true);
-      setsearchCount(0);
-    }, 10000);
-    setIntervalId(intervalId);
+    if (shouldValidate) {
+      let intervalId = setInterval(() => {
+        setTimeout(true);
+        setIsValid(true);
+        setsearchCount(0);
+      }, 60000);
+      setIntervalId(intervalId);
+    }
     return () => {
       clearInterval(intervalId);
     };
@@ -29,7 +29,6 @@ const useSearchValidator = (str) => {
 
   const checkValidation = () => {
     if (searchCount <= 15) {
-      console.log("sahi hai");
       setIsValid(true);
     } else {
       if (timedout) {

@@ -17,8 +17,9 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const [query, setquery] = useState("");
   let currentUser = UserService.getCurrentUser();
+  const shouldValidate = currentUser.name === "luke skywalker" ? false : true;
 
-  let isValidQuery = useSearchValidator(query);
+  let isValidQuery = useSearchValidator(query, shouldValidate);
 
   const GetPopulationIntensity = (population = 0) => {
     switch (true) {
